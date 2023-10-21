@@ -36,34 +36,7 @@ struct HomeView: View {
                     myListsSection
                 }
                 .sheet(isPresented: $showNewReminderSheet, content: {
-                    //TODO: Create the NewReminderFormView
-                    NavigationStack{
-                        Form{
-                            Section{
-                                TextField(text: $newReminderTitleText) {
-                                    Text("Title")
-                                }
-                                TextEditor(text: $newReminderNotesText)
-                                    .frame(height: 60)
-                            }
-                        }
-                        .navigationTitle("New Reminder")
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button(role: .cancel) {
-                                    //TODO: pop the sheet and clear the form.
-                                    showNewReminderSheet.toggle()
-                                } label: {
-                                    Text("Cancel")
-                                }
-                            }
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button(action: {}, label: {
-                                    Text("Add")
-                                })
-                            }
-                        }
-                    }
+                   NewReminderFormView(showNewReminderSheet: $showNewReminderSheet)
                 })
                
             }
@@ -93,6 +66,7 @@ struct HomeView: View {
                 Text("\(notesCategory.categoryName)")
             }
             .onReceive(keyboardPublisher) { value in
+                //TODO: figure out how to animate this better.
                 isKeyBoardVisible = value
             }
         }

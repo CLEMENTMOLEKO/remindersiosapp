@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class NewReminderFormViewModel: ObservableObject {
+    @Published var newReminderTitleText: String = ""
+    @Published var newReminderNotesText: String = ""
+
+    //MARK: Computed properties
+    var canAddReminder: Bool {
+        !self.newReminderNotesText.isEmpty && !self.newReminderTitleText.isEmpty
+    }
+}
